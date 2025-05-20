@@ -31,7 +31,7 @@
             <tbody>
                 <tr v-for="service in filteredServices" :key="service.SERVICIO">
                     <!-- <td><img :src="`/images/${service.ICONO}`" alt="icon" class="service-icon" /></td> -->
-                    <td><img :src="`/images/hospitIcon.jpg`" alt="icon" class="service-icon" /></td>
+                    <td><img src="/images/hospitIcon.jpg" alt="icon" class="service-icon" /></td>
                     <td>{{ service.SERVICIO }}</td>
                     <td>{{ service.ENTRADA }}</td>
                     <td><img :src="isFavorito(service.SERVICIO) ? redHeart : whiteHeart" alt="imageHeart"
@@ -39,6 +39,17 @@
                 </tr>
             </tbody>
         </table>
+
+        <h2>Agregar nuevo servicio (extra)</h2>
+        <form @submit.prevent="addService">
+            <input v-model="newService.ICONO" placeholder="Nombre del icono" required />
+            <input v-model="newService.SERVICIO" placeholder="Nombre del servicio" required />
+            <input v-model="newService.ENTRADA" placeholder="Entrada" required />
+            <button type="submit">Agregar</button>
+        </form>
+        <br><br>
+
+
 
 
     </div>
@@ -61,7 +72,11 @@ const store = useFavoritosStore();
 
 
 
-
+const newService = ref({
+    ICONO: '',
+    SERVICIO: '',
+    ENTRADA: ''
+});
 
 const services = ref([]);
 
@@ -86,8 +101,8 @@ const filteredServicesSel = computed(() => {
 
 // para que no salgan repetidos en el select
 const uniqueServiceNames = computed(() => {
-  const names = services.value.map(s => s.SERVICIO);
-  return [...new Set(names)];
+    const names = services.value.map(s => s.SERVICIO);
+    return [...new Set(names)];
 });
 
 
@@ -123,6 +138,12 @@ const toggleFavs = (service) => {
 
 };
 
+//metodo para añadir nuevo servicio (extra)
+const addService = () => {
+    services.value.push({ ...newService.value }); // spread to copy data
+    newService.value = { ICONO: '', SERVICIO: '', ENTRADA: '' }; // reset form
+};
+
 </script>
 
 <style scoped>
@@ -148,8 +169,7 @@ const toggleFavs = (service) => {
 }
 
 .service-icon {
-  width: 50px;
-  height: 50px;
+    width: 50px;
+    height: 50px;
 }
-
 </style>

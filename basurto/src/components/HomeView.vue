@@ -5,13 +5,13 @@
 </template>
 
 <script setup>
-import bienvenidaH from '@/assets/images/bienvenidaHosp.jpg';
+import bienvenidaH from '@/assets/images/osakiLogo.png';
 
 </script>
 
 <style scoped>
 .introImage {
-  width: 400px;
+  width: 600px;
   height: 300px;
 }
 </style>

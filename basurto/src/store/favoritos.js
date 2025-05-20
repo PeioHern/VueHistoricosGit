@@ -12,12 +12,6 @@ export const useFavoritosStore = defineStore('favorito', {
     // hay que hacer un state para esto en vez de getter
 
 
-    // employeesByDepartment: (state) => {
-    //   return state.employees.reduce((acc, emp) => {
-    //     acc[emp.department] = (acc[emp.department] || 0) + 1;
-    //     return acc;
-    //   }, {});
-    // }
   },
   actions: {
     addFavorito(favorito) {
